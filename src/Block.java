@@ -8,10 +8,11 @@ public class Block {
     private int rColor;
     private int gColor;
     private int bColor;
-    
+    private boolean touching;
+    // private int mouseX;
+    // private int mouseY;
 
-
-    public Block(int xPos, int yPos, PApplet s, int r, int g, int b){
+    public Block(int xPos, int yPos, PApplet s, int r, int g, int b) {
         x = xPos;
         y = yPos;
         size = 225;
@@ -19,16 +20,34 @@ public class Block {
         rColor = r;
         gColor = g;
         bColor = b;
-      
+
     }
 
-    public void display(){
+    public void display() {
         screen.fill(rColor, gColor, bColor);
         screen.rect(x, y, size, size);
     }
-   
 
-    //  fill(252, 255, 186);
-    //         rect(400, 60, 225, 225);
-    
+    public boolean touching(int mouseX, int mouseY) {
+        if (mouseX > x && mouseX < x + size) {
+            if (mouseY > y && mouseY < y + size) {
+                return true;
+            // return mouseX > x && mouseX < x + size && mouseY > y && mouseY < y + size;
+            // else{
+            // touching=false;
+            // }
+            // }
+        }
+        
+    }
+    return false;
+
 }
+}
+
+// if(mouseX > x && mouseX < x+size){
+// if(mouseY > y && mouseY < y+size){
+// touching=true;
+// }
+
+//
