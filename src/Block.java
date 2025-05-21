@@ -12,13 +12,14 @@ public class Block {
     private int gColor;
     private int bColor;
     private boolean touching;
+     long blinkEndTime = 0;
     
 
 
     // private int startFrame = -500;
     // private boolean normalColor = true;
 
-     private boolean isBlinking = false;
+      boolean isBlinking = false;
 
     private final Timer timer = new Timer(); // Shared timer instance per block
 

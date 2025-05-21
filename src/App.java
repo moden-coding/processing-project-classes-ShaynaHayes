@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
-
+import processing.core.PApplet;
+import java.util.*;
 import processing.core.*;
 
 public class App extends PApplet {
@@ -10,6 +11,7 @@ public class App extends PApplet {
     public Block blockThree;
     public Block blockFour;
     ArrayList<Block> blocks;
+    ArrayList<Block> sequence = new ArrayList<>();
     ArrayList<Block> randomOrder;
     public Block blockOneWhite;
     public Block blockTwoWhite;
@@ -22,13 +24,6 @@ public class App extends PApplet {
     boolean isUserTurn = false; // Track whether it's the user's turn to click
     int delayBetweenBlocks = 1000;
 
-    // public int value;
-
-    // public int random;
-
-    // public int mouseX;
-    // public int mouseY;
-
     public static void main(String[] args) {
         PApplet.main("App");
 
@@ -36,10 +31,7 @@ public class App extends PApplet {
 
     public void setup() {
         background(200, 200, 200);
-        // blockOne = new Block(175, 60, this, 255, 186, 217);
-        // blockTwo = new Block(400, 60, this, 255, 255, 186);
-        // blockThree = new Block(175, 285, this, 213, 255, 186);
-        // blockFour = new Block(400, 285, this, 186, 255, 244);
+   
 
         blocks = new ArrayList<>();
         randomOrder = new ArrayList<>();
@@ -48,18 +40,12 @@ public class App extends PApplet {
         blockTwo = new Block(400, 60, this, 255, 255, 186);
         blockThree = new Block(175, 285, this, 213, 255, 186);
         blockFour = new Block(400, 285, this, 186, 255, 244);
-        // blockOneWhite = new Block(175, 60, this, 255, 255, 255);
-        // blockTwoWhite = new Block(400, 60, this, 255, 255, 255);
-        // blockThreeWhite = new Block(175, 285, this, 255, 255, 255);
-        // blockFourWhite = new Block(400, 285, this, 255, 255, 255);
+   
         blocks.add(blockOne);
         blocks.add(blockTwo);
         blocks.add(blockThree);
         blocks.add(blockFour);
-        // blocks.add(blockOneWhite);
-        // blocks.add(blockTwoWhite);
-        // blocks.add(blockThreeWhite);
-        // blocks.add(blockFourWhite);
+     
         chooseRandomBlock();
         playSequence();
     }
@@ -90,7 +76,7 @@ public class App extends PApplet {
             // }
         }
         if (scene == 1) {
-            textSize(55);
+            // textSize(55);
             background(252, 252, 240);
 
             // blockOne.display();
@@ -101,38 +87,7 @@ public class App extends PApplet {
                 b.display();
             }
 
-            // if (randomNumber == 0) {
-            // fill(255);
-            // rect(175, 60, 225, 225);
-            // }
-
-            // if (randomNumber == 1) {
-            // fill(255);
-            // rect(400, 60, 225, 225);
-
-            // }
-
-            // if (randomNumber == 2) {
-            // fill(255);
-            // rect(175, 285, 225, 225);
-            // }
-
-            // if (randomNumber == 3) {
-            // fill(255);
-            // rect(400, 285, 225, 225);
-
-            // }
-            // // fill(252, 255, 186);
-            // // rect(400, 60, 225, 225);
-
-            // fill(186, 255, 244);
-            // rect(400, 285, 225, 225);
-
-            // fill(255, 186, 217);
-            // rect(175, 60, 225, 225);
-
-            // fill(207, 255, 186);
-            // rect(175, 285, 225, 225);
+            
         }
 
     }
@@ -141,10 +96,10 @@ public class App extends PApplet {
         if (key == ' ' && scene == 0) {
             scene = 1;
         }
-        if (key == ' ' && scene == 1) {
+        if (key == 's' && scene == 1) {
             // random(0,4);
             chooseRandomBlock();
-            Block last = randomOrder.get(randomOrder.size() - 1);
+            Block last = randomOrder.get(0);
             last.blink(700);
 
         }
@@ -223,7 +178,10 @@ public class App extends PApplet {
         // System.out.println(randomNumber);
         // // for (int random = 0; random < 4; random++) {
         // randomOrder.add(blocks.get(randomNumber));
-        int randomIndex = (int) random(0, blocks.size());
+        // int randomIndex = (int) random(0, blocks.size());
+            // int randomIndex = (int) random(0, blocks.size());
+            int randomIndex = (int) random(0, 3);
+            System.out.println(randomIndex);
         Block chosenBlock = blocks.get(randomIndex);
         randomOrder.add(chosenBlock);
         // System.out.println("Random block: " + randomNumber);
