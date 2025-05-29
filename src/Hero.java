@@ -31,10 +31,14 @@ public class Hero {
         if (down == true) {
             y += 5;
         }
-        if (y==200){
-scene =8;
+        if (y==630){
+System.out.println("end");
         }
 
+    }
+    public void setPosition(int mx, int my){
+x=mx;
+y=my;
     }
 
     public Hero(int xPos, int yPos, PApplet c) {
@@ -111,4 +115,15 @@ scene =8;
     public int xPos(){
 return x;
     }
+     public int yPos(){
+return y;
+    }
+   public boolean checkPowerUpCollision(PowerUp p) {
+    float d = canvas.dist(x, y, p.getX(), p.getY());
+    float heroRadius = circleD / 2;  // Or define a radius variable if you want
+    if (d <= (heroRadius + p.getRadius())) {
+        return true;
+    }
+    return false;
+}
 }

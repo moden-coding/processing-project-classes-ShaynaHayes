@@ -9,13 +9,13 @@ import java.util.Scanner;
 public class App extends PApplet {
 
     ArrayList<Obstacle> values;
+    ArrayList<PowerUp> PowerUp;
     // ArrayList<Hero> hero;
     Hero hero;
     double highScore;
     double timer;
     double gameStart;
     int scene;
-   
 
     public static void main(String[] args) {
         PApplet.main("App");
@@ -24,6 +24,14 @@ public class App extends PApplet {
 
     public void setup() {
         // first=;
+        PowerUp = new ArrayList<>();
+        PowerUp.add(new PowerUp(350, 290, 10, this));
+        PowerUp.add(new PowerUp(475, 400, 10, this));
+        PowerUp.add(new PowerUp(200, 200, 10, this));
+        PowerUp.add(new PowerUp(80, 320, 10, this));
+        PowerUp.add(new PowerUp(600, 200, 10, this));
+        PowerUp.add(new PowerUp(745, 300, 10, this));
+
         values = new ArrayList<>();
         values.add(new Obstacle(60, -50, this));
         values.add(new Obstacle(60, 420, this));
@@ -38,8 +46,8 @@ public class App extends PApplet {
         values.add(new Obstacle(720, -100, this));
         values.add(new Obstacle(720, 400, this));
         // hero = new ArrayList<>();
-       hero = new Hero(20, 50, this);
-gameStart= millis();
+        hero = new Hero(20, 50, this);
+        gameStart = millis();
 
     }
 
@@ -48,66 +56,96 @@ gameStart= millis();
     }
 
     public void draw() {
+        if (scene == 8) {
+            displayEndScreen();
+            return;
+        }
         background(241, 245, 176);
         for (Obstacle rectangle : values) {
             rectangle.display();
             hero.touching(rectangle);
-             
+            for (PowerUp circle : PowerUp) {
+
+                circle.display();
+            }
         }
-        
-            hero.display();
-            hero.draw();
-           hero.Gravity();
-        
-            
-fill(7,8,8);
-            textSize(50);
-            timer = millis() - gameStart;
-            timer = ((int) timer / 100) / 10.0;
-            text("" + timer, width - 150, 70);
-        
- if (hero.xPos() == 750) {
-    
-                readHighScore();
-               
-                if (highScore ==0 || highScore > timer) {
-                    highScore = timer;
-                    saveHighScore();
-                    scene=8;
-                }
+
+        hero.display();
+        hero.draw();
+        hero.Gravity();
+        // hero.checkPowerUpCollision();
+
+        fill(7, 8, 8);
+        textSize(50);
+        timer = millis() - gameStart;
+        timer = ((int) timer / 100) / 10.0;
+        text("" + timer, width - 150, 70);
+
+        if (hero.xPos() >= 750) {
+
+            readHighScore();
+
+            if (highScore == 0 || highScore > timer) {
+                highScore = timer;
+                saveHighScore();
 
             }
-        //     else {
-        //         // scene=2;{
-                
-        //     // text("Score: " + timer, 280, 290);
-        //     // text("High score: " + highScore, 240, 390);
-        //     //     }
+            scene = 8;
+            
+
+            for (PowerUp powerUp : PowerUp) {
+    if (!powerUp.isCollected() && hero.checkPowerUpCollision(powerUp)) {
+        powerUp.collect();
+        System.out.println("PowerUp collected!");
+        // Add score increment or effect here
+    }
+    powerUp.display();
+}
+        }
+        // else {
+        // // scene=2;{
+
+        // // text("Score: " + timer, 280, 290);
+        // // text("High score: " + highScore, 240, 390);
+        // // }
         // }
         fill(200);
-        rect(775,0,2,700);
-        if(scene==8){
+        rect(775, 0, 2, 700);
+        // if(scene==8){
 
-text("Score: " + timer, 280, 290);
-            text("High score: " + highScore, 240, 390);
-        }
-        // if(hero.xPos==200){
-        //     scene=8;
+        // text("Score: " + timer, 280, 290);
+        // text("High score: " + highScore, 240, 390);
         // }
+        // if(hero.xPos==200){
+        // scene=8;
+        // }
+        System.out.println(hero.yPos());
+        // ChatGPT
+        for (Obstacle rectangle : values) {
+            // rectangle.move(); // If you added movement
+            if (hero.touching(rectangle)) {
+                rectangle.randomizeColor(); // Change color on touch
+            }
+            rectangle.display();
+        }
     }
-      public void saveHighScore() {
-       
+
+    public void saveHighScore() {
+
         try (PrintWriter writer = new PrintWriter("highscore.txt")) {
             writer.println(highScore); // Writes the integer to the file
             writer.close(); // Closes the writer and saves the file
-            
+
         } catch (IOException e) {
             System.out.println("An error occurred while writing to the file.");
             e.printStackTrace();
         }
-
+        if (hero.yPos() == 630) {
+            System.out.println("end");
+        }
     }
- public void readHighScore() {
+
+    public void readHighScore() {
         try (Scanner scanner = new Scanner(Paths.get("highscore.txt"))) {
 
             // we read the file until all lines have been read
@@ -122,20 +160,33 @@ text("Score: " + timer, 280, 290);
         }
 
     }
-    public void keyPressed() {
-// if(key=='h'){
-//     hero.xPos=770;
-// }
-      
 
-            hero.keyPressed(keyCode);
-        
+    public void keyPressed() {
+        // if(key=='h'){
+        // hero.xPos=770;
+        // }
+
+        hero.keyPressed(keyCode);
+
     }
 
     public void keyReleased() {
 
-            hero.keyReleased(keyCode);
-        
+        hero.keyReleased(keyCode);
+
     }
 
+    void displayEndScreen() {
+        background(0);
+        fill(255);
+        textSize(50);
+        text("Score: " + timer, 280, 290);
+        text("High score: " + highScore, 240, 390);
+    }
+
+    public void mouseMoved() {
+        hero.setPosition(mouseX, mouseY);
+    }
+
+    
 }

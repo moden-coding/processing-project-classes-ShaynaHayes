@@ -36,4 +36,15 @@ public class Obstacle {
     public int getHeight(){
         return rectHeight;
     }
+    public void changeColor(int r, int g, int b) {
+    color = canvas.color(r, g, b);
+}
+// ChatGPT
+public void randomizeColor() {
+    int r = (int)canvas.random(256);
+    int g = (int)canvas.random(256);
+    int b = (int)canvas.random(256);
+    color = canvas.color(r, g, b);
+}
+
 }
