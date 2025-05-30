@@ -99,7 +99,7 @@ y=my;
         // circle(closestX,closestY, 15);
         // checks if the red ball is touching the green circle
         if (canvas.dist(x, y, closestX, closestY) <= 25) {
-            System.out.println("touching");
+            // System.out.println("touching");
             x = 20;
             y = 50;
             // circleX = 0;

@@ -91,18 +91,23 @@ public class App extends PApplet {
 
             }
             scene = 8;
-            
 
-            for (PowerUp powerUp : PowerUp) {
-    if (!powerUp.isCollected() && hero.checkPowerUpCollision(powerUp)) {
-        powerUp.collect();
-        System.out.println("PowerUp collected!");
-        PowerUp.remove(powerUp);
-    
-    }
-    powerUp.display();
-}
+            
         }
+
+        for (PowerUp powerUp : PowerUp) {
+                if (!powerUp.isCollected()) {
+                    System.out.println("power up not collected");
+
+                    if (hero.checkPowerUpCollision(powerUp)) {
+                        powerUp.collect();
+                        System.out.println("PowerUp collected!");
+                        PowerUp.remove(powerUp);
+
+                    }
+                    powerUp.display();
+                }
+            }
         // else {
         // // scene=2;{
 
@@ -120,7 +125,7 @@ public class App extends PApplet {
         // if(hero.xPos==200){
         // scene=8;
         // }
-        System.out.println(hero.yPos());
+        // System.out.println(hero.yPos());
         // ChatGPT
         for (Obstacle rectangle : values) {
             // rectangle.move(); // If you added movement
@@ -189,5 +194,4 @@ public class App extends PApplet {
         hero.setPosition(mouseX, mouseY);
     }
 
-    
 }
