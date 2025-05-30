@@ -120,9 +120,10 @@ return y;
     }
    public boolean checkPowerUpCollision(PowerUp p) {
     float d = canvas.dist(x, y, p.getX(), p.getY());
-    float heroRadius = circleD / 2;  // Or define a radius variable if you want
+    float heroRadius = circleD / 2;  
     if (d <= (heroRadius + p.getRadius())) {
         return true;
+        
     }
     return false;
 }
