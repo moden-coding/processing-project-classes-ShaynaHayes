@@ -97,8 +97,8 @@ public class App extends PApplet {
     if (!powerUp.isCollected() && hero.checkPowerUpCollision(powerUp)) {
         powerUp.collect();
         System.out.println("PowerUp collected!");
-        // PowerUp.remove(powerUp);
-        // Add score increment or effect here
+        PowerUp.remove(powerUp);
+    
     }
     powerUp.display();
 }
