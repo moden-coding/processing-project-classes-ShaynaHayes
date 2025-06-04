@@ -1,6 +1,7 @@
 import processing.core.PApplet;
 
 public class PowerUp {
+    // ball size
     private int r = 10;
 private int d=20;
     private int x;
@@ -13,6 +14,7 @@ private int d=20;
     // example size
 
     public PowerUp(int xPos, int yPos, int radius,PApplet c) {
+        // setting up the power up array list for teh main class 
         x = xPos;
         y = yPos;
         r=radius;
@@ -23,6 +25,7 @@ private int d=20;
     }
 
     public void display() {
+        // displaying cirlces on main screen 
         // canvas.noStroke();
         canvas.fill(color);
         canvas.circle(x, y, r);
@@ -55,6 +58,7 @@ private int d=20;
         collected = true;
     }
 public void RadiusC(){
+    // circle radius 
     r=10;
 }
 }

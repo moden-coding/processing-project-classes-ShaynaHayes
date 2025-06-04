@@ -1,13 +1,14 @@
 import processing.core.PApplet;
 
 public class Hero {
+    // x increase of cirlce 
     int circleXSpeed = 5;
-
-    boolean right = false;
-    boolean left = false;
-    boolean up = false;
-    boolean down = false;
-    int scene = 0;
+// setting all the booleans to false
+   private boolean right = false;
+  private  boolean left = false;
+   private boolean up = false;
+ private   boolean down = false;
+   
 
     private int x;
     private int y;
@@ -16,7 +17,7 @@ public class Hero {
     private int circleD;
 
     public void draw() {
-
+// boolean for arrow keys so they move smoothly
         if (right == true) {
             x += circleXSpeed;
         }
@@ -37,6 +38,7 @@ System.out.println("end");
 
     }
     public void setPosition(int mx, int my){
+        // the x and y of the hero 
 x=mx;
 y=my;
     }
@@ -70,12 +72,13 @@ y=my;
         if (keyCode == canvas.DOWN) {
             down = true;
         }
-        if(keyCode=='h'){
-    x=770;
-}
+//         if(keyCode=='h'){
+//     x=770;
+// }
     }
 
     public void keyReleased(int keyCode) {
+        // if the keys are not pressed 
         if (keyCode == canvas.RIGHT) {
             right = false;
         }
@@ -92,12 +95,12 @@ y=my;
 
     public boolean touching(Obstacle obs) {
 
-        // Checks if the green ball is touching any rectangles in the game
+        // Checks if the blue ball is touching any rectangles in the game
         float closestX = canvas.constrain(x, obs.getX(), obs.getX() + obs.getWidth());
         float closestY = canvas.constrain(y, obs.getY(), obs.getY() + obs.getHeight());
 
         // circle(closestX,closestY, 15);
-        // checks if the red ball is touching the green circle
+        //
         if (canvas.dist(x, y, closestX, closestY) <= 25) {
             // System.out.println("touching");
             x = 20;
@@ -109,16 +112,19 @@ y=my;
     }
 
     public void Gravity() {
+        // moving the ball down gradually
         y = y + 2;
 
     }
     public int xPos(){
+        // x position
 return x;
     }
      public int yPos(){
 return y;
     }
    public boolean checkPowerUpCollision(PowerUp p) {
+    // checking if the hero ball is touching the power ups around the maze 
     float d = canvas.dist(x, y, p.getX(), p.getY());
     float heroRadius = circleD / 2;  
     if (d <= (heroRadius + p.getRadius())) {

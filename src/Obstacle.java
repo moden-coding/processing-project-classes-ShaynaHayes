@@ -1,6 +1,7 @@
 import processing.core.PApplet;
 
 public class Obstacle {
+    // same width and height for all the obstacles
     private int rectWidth = 50;
    private int rectHeight = 300;
    private int x;
@@ -11,6 +12,7 @@ public class Obstacle {
   
 
     public Obstacle(int xPos, int yPos, PApplet c) {
+        // making the obstacle an array list format  
         x = xPos;
         y = yPos;
         canvas = c;
@@ -25,6 +27,7 @@ public class Obstacle {
     }
 
     public int getX(){
+        // rectangle x 
         return x;
     }
     public int getY(){
@@ -41,6 +44,7 @@ public class Obstacle {
 }
 // ChatGPT
 public void randomizeColor() {
+    // rectangle color changes each time the ball touches the rectnagle 
     int r = (int)canvas.random(256);
     int g = (int)canvas.random(256);
     int b = (int)canvas.random(256);
